@@ -1,0 +1,33 @@
+﻿<Window x:Class="ImageProcessSuite.Window2"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Line Profile (Controller)"
+        Width="900" Height="700"
+        WindowStartupLocation="CenterOwner">
+    <DockPanel>
+        <!-- ツールバー -->
+        <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" Margin="8" >
+            <RadioButton x:Name="RowRadio" Content="行" IsChecked="True" Margin="0,0,8,0" Checked="ModeChanged"/>
+            <RadioButton x:Name="ColRadio" Content="列" Margin="0,0,16,0" Checked="ModeChanged"/>
+            <TextBlock Text="インデックス:" VerticalAlignment="Center"/>
+            <TextBox x:Name="IndexBox" Width="80" Margin="6,0,8,0" Text="0"/>
+            <Slider x:Name="IndexSlider" Width="240" Minimum="0" Maximum="0" Margin="0,0,8,0"
+                    ValueChanged="IndexSlider_ValueChanged"/>
+            <CheckBox x:Name="RgbCheck" Content="RGB別に表示" Margin="8,0,0,0"
+                      Checked="RedrawIfPossible" Unchecked="RedrawIfPossible"/>
+            <Button Content="描画/更新" Margin="12,0,0,0" Click="DrawButton_Click"/>
+            <Button Content="CSVで保存" Margin="8,0,0,0" Click="SaveCsvButton_Click"/>
+            <Button Content="グラフウィンドウを開く" Margin="8,0,0,0" Click="OpenGraphButton_Click"/>
+        </StackPanel>
+
+        <!-- 画像プレビュー（等倍表示）＋ ガイド線レイヤ -->
+        <Border BorderBrush="#DDD" BorderThickness="1" Margin="8" Padding="8">
+            <ScrollViewer x:Name="Scroll" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                <Grid>
+                    <Image x:Name="PreviewImage" Stretch="None"/>
+                    <Canvas x:Name="GuideCanvas" IsHitTestVisible="False"/>
+                </Grid>
+            </ScrollViewer>
+        </Border>
+    </DockPanel>
+</Window>

@@ -1,0 +1,30 @@
+﻿<Window x:Class="ImageProcessSuite.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ImageProcessSuite"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="230" Width="506">
+    <Grid Cursor="Hand" Margin="0,0,0,7">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="210*"/>
+            <ColumnDefinition Width="191*"/>
+        </Grid.ColumnDefinitions>
+        <Button Content="Close" HorizontalAlignment="Left" Margin="155,142,0,0" VerticalAlignment="Top" Width="132" Click="Button_Click" Grid.ColumnSpan="2"/>
+        <Label Content="ReadFile:" HorizontalAlignment="Left" Margin="39,29,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="textBox_1" HorizontalAlignment="Left" Margin="100,28,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="202" Grid.ColumnSpan="2"/>
+        <Label Content="WriteFile:" HorizontalAlignment="Left" Margin="39,98,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="textBox_2" HorizontalAlignment="Left" Margin="101,97,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="199" Grid.ColumnSpan="2"/>
+        <Button Content="imageProcess" HorizontalAlignment="Left" Margin="82,97,0,0" VerticalAlignment="Top" Width="127" Click="Button_Click_3" Cursor="Hand" Grid.Column="1"/>
+        <Button Content="…" HorizontalAlignment="Left" Margin="49,38,0,0" VerticalAlignment="Top" Click="Button_Click_1" Width="16" Height="15" Grid.Column="1" Cursor="Hand"/>
+        <Button Content="…" HorizontalAlignment="Left" Margin="49,107,0,0" VerticalAlignment="Top" Click="Button_Click_2" Width="16" Height="15" Grid.Column="1"/>
+
+        <Line X1="0" Y1="0" X2="500" Y2="0"
+        Stroke="Silver" StrokeThickness="3"
+        SnapsToDevicePixels="True" Grid.ColumnSpan="2" Margin="39,65,15,243" RenderTransformOrigin="0.457,0.397"/>
+        <Button Grid.Column="1" Content="ImageShow" HorizontalAlignment="Left" Margin="82,28,0,0" VerticalAlignment="Top" Click="Button_Click_5" Width="127"/>
+
+    </Grid>
+
+</Window>
