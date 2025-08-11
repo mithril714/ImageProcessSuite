@@ -91,8 +91,8 @@
     <Compile Include="GraphWindow.xaml.cs">
       <DependentUpon>GraphWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Window2.xaml.cs">
-      <DependentUpon>Window2.xaml</DependentUpon>
+    <Compile Include="ThresholdDialog.xaml.cs">
+      <DependentUpon>ThresholdDialog.xaml</DependentUpon>
     </Compile>
     <Page Include="GraphWindow.xaml">
       <SubType>Designer</SubType>
@@ -110,7 +110,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Window2.xaml">
+    <Page Include="ThresholdDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

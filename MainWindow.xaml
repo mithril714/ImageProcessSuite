@@ -1,30 +1,88 @@
 ﻿<Window x:Class="ImageProcessSuite.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:ImageProcessSuite"
-        mc:Ignorable="d"
-        Title="MainWindow" Height="230" Width="506">
-    <Grid Cursor="Hand" Margin="0,0,0,7">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="210*"/>
-            <ColumnDefinition Width="191*"/>
-        </Grid.ColumnDefinitions>
-        <Button Content="Close" HorizontalAlignment="Left" Margin="155,142,0,0" VerticalAlignment="Top" Width="132" Click="Button_Click" Grid.ColumnSpan="2"/>
-        <Label Content="ReadFile:" HorizontalAlignment="Left" Margin="39,29,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="textBox_1" HorizontalAlignment="Left" Margin="100,28,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="202" Grid.ColumnSpan="2"/>
-        <Label Content="WriteFile:" HorizontalAlignment="Left" Margin="39,98,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="textBox_2" HorizontalAlignment="Left" Margin="101,97,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="199" Grid.ColumnSpan="2"/>
-        <Button Content="imageProcess" HorizontalAlignment="Left" Margin="82,97,0,0" VerticalAlignment="Top" Width="127" Click="Button_Click_3" Cursor="Hand" Grid.Column="1"/>
-        <Button Content="…" HorizontalAlignment="Left" Margin="49,38,0,0" VerticalAlignment="Top" Click="Button_Click_1" Width="16" Height="15" Grid.Column="1" Cursor="Hand"/>
-        <Button Content="…" HorizontalAlignment="Left" Margin="49,107,0,0" VerticalAlignment="Top" Click="Button_Click_2" Width="16" Height="15" Grid.Column="1"/>
+        Title="ImageProcessSuite"
+        Width="980" Height="720"
+        WindowStartupLocation="CenterScreen">
+    <DockPanel>
 
-        <Line X1="0" Y1="0" X2="500" Y2="0"
-        Stroke="Silver" StrokeThickness="3"
-        SnapsToDevicePixels="True" Grid.ColumnSpan="2" Margin="39,65,15,243" RenderTransformOrigin="0.457,0.397"/>
-        <Button Grid.Column="1" Content="ImageShow" HorizontalAlignment="Left" Margin="82,28,0,0" VerticalAlignment="Top" Click="Button_Click_5" Width="127"/>
+        <!-- ── メニューバー（横一列） ───────────────────────── -->
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="_ファイル">
+                <MenuItem Header="_開く..." Click="Open_Click" InputGestureText="Ctrl+O"/>
+                <MenuItem x:Name="MenuSaveAs" Header="名前を付けて保存..." Click="SaveAs_Click" InputGestureText="Ctrl+Shift+S"/>
+                <MenuItem x:Name="MenuSaveCsv" Header="_CSVで保存" Click="SaveCsv_Click" InputGestureText="Ctrl+S"/>
+                <Separator/>
+                <MenuItem Header="_終了" Click="Exit_Click" InputGestureText="Alt+F4"/>
+            </MenuItem>
+            <MenuItem Header="_処理">
+                <MenuItem Header="ブラー..." Click="Proc_Blur_Click" InputGestureText="F1"/>
+                <MenuItem Header="二値化..." Click="Proc_BinarizeDialog_Click"/>
+                <!-- ここからバッチ処理 -->
+                <MenuItem Header="バッチ処理">
+                    <MenuItem Header="フォルダ一括: 二値化..." Click="Batch_Binarize_Click"/>
+                    <MenuItem Header="フォルダ一括: ぼかし..." Click="Batch_Blur_Click"/>
+                </MenuItem>
+            </MenuItem>
 
-    </Grid>
+            <MenuItem Header="_ヘルプ">
+                <MenuItem Header="使い方" Click="Help_Click" InputGestureText="F1"/>
+            </MenuItem>
+        </Menu>
 
+        <!-- ── ツールバー（操作系まとめ） ───────────────────── -->
+        <ToolBarTray DockPanel.Dock="Top">
+            <ToolBar x:Name="MainToolBar">
+                <!-- モード -->
+                <StackPanel Orientation="Horizontal" Margin="0,0,8,0">
+                    <TextBlock Text="モード:" VerticalAlignment="Center" Margin="0,0,6,0"/>
+                    <RadioButton x:Name="RowRadio" Content="行" IsChecked="True"
+                                 Checked="ModeChanged" Margin="0,0,6,0"/>
+                    <RadioButton x:Name="ColRadio" Content="列" Checked="ModeChanged"/>
+                </StackPanel>
+
+                <!-- インデックス -->
+                <Separator/>
+                <StackPanel Orientation="Horizontal" Margin="8,0,0,0">
+                    <TextBlock Text="インデックス:" VerticalAlignment="Center"/>
+                    <TextBox x:Name="IndexBox" Width="80" Margin="6,0,8,0" Text="0"
+                             TextChanged="IndexBox_TextChanged"/>
+                    <Slider x:Name="IndexSlider" Width="300" Minimum="0" Maximum="0"
+                            ValueChanged="IndexSlider_ValueChanged"/>
+                </StackPanel>
+
+                <!-- 操作 -->
+                <Separator/>
+                <Button x:Name="DrawButton" Content="描画/更新"
+                        Click="DrawButton_Click" Padding="8,2"/>
+                <CheckBox x:Name="RgbCheck" Content="RGB別" Margin="12,0,0,0"
+                          Checked="RedrawIfPossible" Unchecked="RedrawIfPossible"/>
+
+                <Separator/>
+                <Button x:Name="OpenGraphButton" Content="グラフを開く"
+                        Click="OpenGraph_Click" Padding="8,2"/>
+
+                <Separator/>
+                <CheckBox x:Name="StretchToggle" Content="等倍表示"
+                          IsChecked="True"
+                          Checked="StretchToggle_Changed"
+                          Unchecked="StretchToggle_Changed"/>
+
+            </ToolBar>
+        </ToolBarTray>
+
+        <!-- ── メイン表示（画像＋ガイド線） ─────────────────── -->
+        <Border BorderBrush="#DDD" BorderThickness="1" Margin="8" Padding="8">
+            <ScrollViewer x:Name="Scroll"
+                          HorizontalScrollBarVisibility="Auto"
+                          VerticalScrollBarVisibility="Auto">
+                <Grid>
+                    <Image x:Name="PreviewImage" Stretch="None"
+                           MouseRightButtonUp="PreviewImage_MouseRightButtonUp"/>
+                    <Canvas x:Name="GuideCanvas" IsHitTestVisible="False"/>
+                </Grid>
+            </ScrollViewer>
+        </Border>
+
+    </DockPanel>
 </Window>

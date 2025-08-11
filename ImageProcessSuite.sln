@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageProcessSuite", "ImageP
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "imgTool", "..\imgTool\imgTool.vcxproj", "{ACBF4B95-7BF2-4713-BCE0-AD8F2AF6F11A}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ImageProcess", "ImageProcess\ImageProcess.vcxproj", "{4653AD64-682C-4645-A44C-2E4DE50B6BEC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,6 +43,18 @@ Global
 		{ACBF4B95-7BF2-4713-BCE0-AD8F2AF6F11A}.Release|x64.Build.0 = Release|x64
 		{ACBF4B95-7BF2-4713-BCE0-AD8F2AF6F11A}.Release|x86.ActiveCfg = Release|Win32
 		{ACBF4B95-7BF2-4713-BCE0-AD8F2AF6F11A}.Release|x86.Build.0 = Release|Win32
+		{4653AD64-682C-4645-A44C-2E4DE50B6BEC}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{4653AD64-682C-4645-A44C-2E4DE50B6BEC}.Debug|Any CPU.Build.0 = Debug|x64
+		{4653AD64-682C-4645-A44C-2E4DE50B6BEC}.Debug|x64.ActiveCfg = Debug|x64
+		{4653AD64-682C-4645-A44C-2E4DE50B6BEC}.Debug|x64.Build.0 = Debug|x64
+		{4653AD64-682C-4645-A44C-2E4DE50B6BEC}.Debug|x86.ActiveCfg = Debug|Win32
+		{4653AD64-682C-4645-A44C-2E4DE50B6BEC}.Debug|x86.Build.0 = Debug|Win32
+		{4653AD64-682C-4645-A44C-2E4DE50B6BEC}.Release|Any CPU.ActiveCfg = Release|x64
+		{4653AD64-682C-4645-A44C-2E4DE50B6BEC}.Release|Any CPU.Build.0 = Release|x64
+		{4653AD64-682C-4645-A44C-2E4DE50B6BEC}.Release|x64.ActiveCfg = Release|x64
+		{4653AD64-682C-4645-A44C-2E4DE50B6BEC}.Release|x64.Build.0 = Release|x64
+		{4653AD64-682C-4645-A44C-2E4DE50B6BEC}.Release|x86.ActiveCfg = Release|Win32
+		{4653AD64-682C-4645-A44C-2E4DE50B6BEC}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
